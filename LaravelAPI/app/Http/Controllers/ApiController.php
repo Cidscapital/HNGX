@@ -20,8 +20,8 @@ class ApiController extends Controller
         $currentUtcTime = gmdate('Y-m-d\TH:i:s\Z');
 
         // Define GitHub URLs
-        $githubFileUrl = 'https://github.com/username/repo/blob/main/file_name.ext';
-        $githubRepoUrl = 'https://github.com/username/repo';
+        $githubFileUrl = 'https://github.com/Cidscapital/HNGX/blob/main/LaravelAPI/app/Http/Controllers/ApiController.php';
+        $githubRepoUrl = 'https://github.com/Cidscapital/HNGX/tree/main/LaravelAPI';
 
         // Create the JSON response array
         $data = [
