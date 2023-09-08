@@ -17,7 +17,7 @@ class ApiController extends Controller
         $currentDay = date('l');
 
         // Get current UTC time with validation of +/-2 minutes
-        $currentUtcTime = gmdate('Y-m-d\TH:i:s\Z');
+        $currentUtcTime = gmdate('Y-m-d H:i:s');
 
         // Define GitHub URLs
         $githubFileUrl = 'https://github.com/Cidscapital/HNGX/blob/main/LaravelAPI/app/Http/Controllers/ApiController.php';
