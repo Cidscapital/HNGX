@@ -28,7 +28,7 @@ use App\Http\Controllers\API\ProductController;
 //});
 
 //public route
-Route::get('/hng', [ApiController::class, 'task1']);
+Route::get('/', [ApiController::class, 'task1']);
 //Route::post('/login', [AuthController::class, 'login']);
 //Route::post('/register', [AuthController::class, 'register']);
 //Route::get('/shows', [ProductController::class, 'index']);
