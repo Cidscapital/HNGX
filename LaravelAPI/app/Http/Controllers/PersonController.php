@@ -98,7 +98,7 @@ class PersonController extends Controller
     public function editById(int $id, Request $request): JsonResponse
     {
 
-        $Person = Persons::find($id);
+
 
         // Validate the person data
         $validate = validator::make($request->all(), [
@@ -110,6 +110,12 @@ class PersonController extends Controller
         if ($validate->fails()) {
             $errors = $validate->errors();
             return response()->json([$errors], 400);
+        }
+
+        $Person = Persons::find($id);
+
+        if (!$Person) {
+            return response()->json(['message' => 'ID not found'], 404);
         }
 
             // Create the person record
