@@ -24,10 +24,8 @@ use Illuminate\Support\Facades\Route;
 
 //public route
 Route::post('/', [PersonController::class, 'store']);
-Route::get('/', [PersonController::class, 'index']);
-Route::get('/{name}', [PersonController::class, 'showByName']);
+Route::get('/', [PersonController::class, 'showByName']);
 Route::get('/{id}', [PersonController::class, 'showById']);
-Route::put('/{name}', [PersonController::class, 'editByName']);
 Route::put('/{id}', [PersonController::class, 'editById']);
-Route::delete('/{name}', [PersonController::class, 'deleteByName']);
+Route::delete('/', [PersonController::class, 'deleteByName']);
 Route::delete('/{id}', [PersonController::class, 'deleteById']);

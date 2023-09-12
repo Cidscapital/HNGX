@@ -2,17 +2,14 @@
 [http://35.153.44.149/api](http://35.153.44.149/api)
 
 ## API Endpoints/Routes
-| HTTP Method	| Path | Action | Description |
-| --- | --- | --- |-----------|
-| GET | / | index | No action |
-| GET | /{name} | showByName | Get a person by name |
-| GET | /{id} | showById | Get a person by id |
-| POST | / | store | Create a new person |
-| PUT | /{name} | editByName | Update a person by name |
-| PUT | /{id} | editById | Update a person by id |
-| DELETE | /{name} | deleteByName | Delete a person by name |
-| DELETE | /{id} | deleteById | Delete a person by id |
-
+| HTTP Method	 | Path  | Body            | Parameter          | Action       | Description             |
+|--------------|-------|-----------------|--------------------|--------------|-------------------------|
+| GET          | /     | -               | name=_John Doe_    | index        | Get Details by name     |
+| GET          | /{id} | -               | -                  | showById     | Get Details by id       |
+| POST         | /     | name=_John Doe_ | -                  | store        | Create a new person     |
+| PUT          | /{id} | -               | name=_Jesse Jason_ | editById     | Update a person by id   |
+| DELETE       | /{id} | -               | -                  | deleteById   | Delete a person by id   |
+ | DELETE       | /     | -               | name=_Jesse Jason_ | deleteByName | Delete a person by name |
 
 <h2> Setup Instructions </h2>
 

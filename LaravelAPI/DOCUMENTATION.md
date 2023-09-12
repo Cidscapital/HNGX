@@ -14,16 +14,14 @@ This document provides information on the REST API for managing a "Person" resou
 <h2 id=routes> 1. Routes </h2>
 
 ## API Endpoints/Routes
-| HTTP Method	| Path | Action | Description |
-| --- | --- | --- |-----------|
-| GET | / | index | No action |
-| GET | /{name} | showByName | Get a person by name |
-| GET | /{id} | showById | Get a person by id |
-| POST | / | store | Create a new person |
-| PUT | /{name} | editByName | Update a person by name |
-| PUT | /{id} | editById | Update a person by id |
-| DELETE | /{name} | deleteByName | Delete a person by name |
-| DELETE | /{id} | deleteById | Delete a person by id |
+| HTTP Method	 | Path  | Body            | Parameter          | Action       | Description             |
+|--------------|-------|-----------------|--------------------|--------------|-------------------------|
+| GET          | /     | -               | name=_John Doe_    | index        | Get Details by name     |
+| GET          | /{id} | -               | -                  | showById     | Get Details by id       |
+| POST         | /     | name=_John Doe_ | -                  | store        | Create a new person     |
+| PUT          | /{id} | -               | name=_Jesse Jason_ | editById     | Update a person by id   |
+| DELETE       | /{id} | -               | -                  | deleteById   | Delete a person by id   |
+| DELETE       | /     | -               | name=_Jesse Jason_ | deleteByName | Delete a person by name |
 
 
 <h2 id=standard-formats> 2. Standard Formats </h2>
@@ -73,7 +71,7 @@ API responses are in JSON format and include a message and data field (or errors
 
 
 ```json lines
-POST /api
+POST /
 
 {
   "name": "John Doe"
@@ -93,6 +91,10 @@ POST /api
   }
 }
 ```
+Sampe API Usage
+```text
+http://35.153.44.149/api
+```
 
 <h4>Response(Validation Failure)</h4>
 
@@ -110,7 +112,10 @@ POST /api
 <h4>Request</h4>
 
 ```json lines
-GET /api/John Doe
+GET /
+
+Query Parameter
+    - name
 ```
 
 <h4>Response(Success)</h4>
@@ -134,16 +139,20 @@ GET /api/John Doe
       "Message": "Name not found"
   }
 ```
+Sampe API Usage:
+```text
+http://35.153.44.149/api?name=John%20Doe
+```
 
 <h3> Update a Person by ID</h3>
 
 <h4>Request</h4>
 ```
-POST /api/1?_method=PUT
+PUT /{ID}
 ```
 
 ```json lines
-
+Parameter 
 {
   "name": "Jane Doe"
 }
@@ -174,13 +183,44 @@ POST /api/1?_method=PUT
   }
 }
 ```
+Sampe API Usage:
+```text
+http://35.153.44.149/api/1?name=Jane%20Doe
+```
 
 <h3> Delete a Person by ID</h3>
 
 <h4>Request</h4>
 
 ```
-DELETE /api/1
+DELETE /{ID}
+```
+
+<h4>Response(Success)</h4>
+
+```json 
+{
+  "message": "Person deleted successfully"
+}
+```
+
+<h4>Response(Validation Failure)</h4>
+
+```json lines
+{
+  "message": "ID not found"
+}
+```
+Sampe API Usage:
+```text
+http://35.153.44.149/api/1
+```
+
+<h3> Delete a Person by Name</h3>
+<h4>Request</h4>
+
+```
+DELETE /?name={name}
 ```
 
 <h4>Response(Success)</h4>
@@ -197,6 +237,10 @@ DELETE /api/1
 {
   "message": "Person not found"
 }
+```
+Sampe API Usage:
+```text
+http://35.153.44.149/api?name=Jane%20Doe
 ```
 
 <h2 id=limitations-and-assumptions> 4. Limitations and Assumptions </h2>
