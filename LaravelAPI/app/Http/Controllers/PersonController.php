@@ -140,7 +140,7 @@ class PersonController extends Controller
 
         $Person->delete();
 
-        return response()->json(['message' => 'Person deleted successfully']);
+        return response()->json(['message' => 'Person deleted successfully'], 204);
     }
 
     // function to delete a person by name
@@ -167,7 +167,7 @@ class PersonController extends Controller
 
         $Person->delete();
 
-        return response()->json(['message' => 'Person deleted successfully']);
+        return response()->json(['message' => 'Person deleted successfully'], 204);
     }
 
 
