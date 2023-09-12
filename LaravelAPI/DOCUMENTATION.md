@@ -2,13 +2,31 @@
 
 This document provides information on the REST API for managing a "Person" resource.
 
-## Table of Contents
-1. [Standard Formats](#standard-formats)
-2. [Sample API Usage](#sample-api-usage)
-3. [Limitations and Assumptions](#limitations-and-assumptions)
-4. [Setup Instructions](#setup-instructions)
+## Application Endpoint
+[http://35.153.44.149/api](http://35.153.44.149/api)
 
-<h2 id=standard-formats> 1. Standard Formats </h2>
+## Table of Contents
+1. [API Endpoints/Routes](#routes)
+2. [Standard Formats](#standard-formats)
+3. [Sample API Usage](#sample-api-usage)
+4. [Limitations and Assumptions](#limitations-and-assumptions)
+
+<h2 id=routes> 1. Routes </h2>
+
+## API Endpoints/Routes
+| HTTP Method	| Path | Action | Description |
+| --- | --- | --- |-----------|
+| GET | / | index | No action |
+| GET | /{name} | showByName | Get a person by name |
+| GET | /{id} | showById | Get a person by id |
+| POST | / | store | Create a new person |
+| PUT | /{name} | editByName | Update a person by name |
+| PUT | /{id} | editById | Update a person by id |
+| DELETE | /{name} | deleteByName | Delete a person by name |
+| DELETE | /{id} | deleteById | Delete a person by id |
+
+
+<h2 id=standard-formats> 2. Standard Formats </h2>
 
 ### Request Format
 All requests should be made using the JSON format with the following structure:
@@ -47,7 +65,7 @@ API responses are in JSON format and include a message and data field (or errors
   }
 }
 ```
-<h2 id=sample-api-usage> 2. Sample API Usage </h2>
+<h2 id=sample-api-usage> 3. Sample API Usage </h2>
 
 <h3>Create a New Person</h3>
 <h4>Request</h4>
@@ -181,44 +199,8 @@ DELETE /api/1
 }
 ```
 
-<h2 id=limitations-and-assumptions> 3. Limitations and Assumptions </h2>
+<h2 id=limitations-and-assumptions> 4. Limitations and Assumptions </h2>
 
 - This API assumes that names are unique when creating or searching for people.
 - Validation is performed on the request data to ensure the correctness of inputs.
 
-<h2 id=setup-instructions> 4. Setup Instructions </h2>
-
-To set up the project locally, follow the steps below:
-
-1. Clone the repository to your local machine
-```text
-git clone https://github.com/Cidscapital/HNGX.git
-```
-2. Change directory into the project folder
-```text
-cd HNGX
-```
-3. Install dependencies
-```text
-composer install
-```
-4. Create a copy of the .env file
-```text
-cp .env.example .env
-```
-5. Generate an app encryption key
-```text 
-php artisan key:generate
-```
-6. Create an empty database for the application
-7. In the .env file, add database information to allow Laravel to connect to the database
-8. Migrate the database
-```text
-php artisan migrate
-```
-9. Start the local development server
-```text
-php artisan serve
-```
-
-You can now access the server at http://localhost:8000

@@ -16,7 +16,7 @@ class PersonController extends Controller
     {
         //$Person = Persons::all();
 
-        return response()->json(['message' => 'Viewing all users is disabled, please search by name to view a specific user.'], 200);
+        return response()->json(['message' => 'Viewing all users is disabled, please search by name/id to view a specific user.'], 200);
     }
 
     public function store(Request $request): JsonResponse
@@ -55,6 +55,45 @@ class PersonController extends Controller
         return response()->json(['data' => $person], 200);
     }
 
+    // Retrieve details of a specific person by ID
+    public function showById($id): JsonResponse
+    {
+        $person = Persons::find($id);
+
+        if (!$person) {
+            return response()->json(['Message' => 'ID not found'], 404);
+        }
+
+        return response()->json(['data' => $person], 200);
+    }
+
+    // Edit person details by name
+    public function editByName($name, Request $request): JsonResponse
+    {
+
+        $Person = Persons::where('name', $name)->first();
+
+        // Validate the person data
+        $validate = validator::make($request->all(), [
+            'name' => 'required|regex:/^[\pL\s]+$/u|max:255|unique:persons',
+        ]);
+
+        // if validation is successful, update the person
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return response()->json([$errors], 400);
+        }
+
+            // Create the person record
+            $Person->name = $request->input('name');
+
+            $Person->update();
+
+            // You may also add other logic here, such as sending an email confirmation to the customer, etc.
+
+            return response()->json(['message' => 'Person updated successfully', 'Person' => $Person], 200);
+    }
+
 
     /**
      * Get person details by ID.
@@ -74,7 +113,7 @@ class PersonController extends Controller
         ]);
 
 
-        // if validation is successful, create the person
+        // if validation is successful, update the person
         if ($validate->fails()) {
             $errors = $validate->errors();
             return response()->json([$errors], 400);
@@ -95,6 +134,20 @@ class PersonController extends Controller
     public function deleteById($id): JsonResponse
     {
         $Person = Persons::find($id);
+
+        if (!$Person) {
+            return response()->json(['message' => 'Person not found'], 404);
+        }
+
+        $Person->delete();
+
+        return response()->json(['message' => 'Person deleted successfully']);
+    }
+
+    // function to delete a person by name
+    public function deleteByName($name): JsonResponse
+    {
+        $Person = Persons::where('name', $name)->first();
 
         if (!$Person) {
             return response()->json(['message' => 'Person not found'], 404);
